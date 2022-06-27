@@ -1,0 +1,17 @@
+@use '../../styles/media-queries' as mq;
+@use '../../styles/utils' as utils;
+
+// Sets max-width of width-container using $breakpoint map
+.width-container {
+  @include utils.limit-width(map-get(mq.$breakpoints, 'md'));
+  margin: 0 auto;
+  overflow: hidden;
+
+  @include mq.lg {
+    @include utils.limit-width(map-get(mq.$breakpoints, 'lg'));
+  }
+
+  @include mq.xl {
+    @include utils.limit-width(map-get(mq.$breakpoints, 'xl'));
+  }
+}

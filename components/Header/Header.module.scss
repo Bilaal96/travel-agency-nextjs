@@ -1,0 +1,55 @@
+@use '../../styles/colors' as clr;
+@use '../../styles/media-queries' as mq;
+@use '../../styles/utils' as utils;
+
+.header {
+  position: fixed;
+  width: 100%;
+  height: utils.$header-height;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+  background-color: clr.$light;
+  color: clr.$primary;
+  font-weight: 700;
+  border-bottom: 2px solid clr.$grey-100;
+  z-index: 500;
+
+  // .header position is fixed; offset adjacent sibling so that it is completely visible
+  & + * {
+    position: relative;
+    top: utils.$header-height;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include utils.limit-width(map-get(mq.$breakpoints, 'md'));
+    margin: 0 auto;
+
+    @include mq.xl {
+      @include utils.limit-width(map-get(mq.$breakpoints, 'lg'));
+    }
+
+    /*  @include mq.xl {
+      @include utils.limit-width(map-get(mq.$breakpoints, 'xl'));
+    } */
+
+    .logo {
+      a {
+        display: flex;
+        gap: 1rem;
+        font-size: 2.4rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      // Highlight text
+      .logo-text span {
+        color: clr.$secondary;
+      }
+    }
+  }
+}

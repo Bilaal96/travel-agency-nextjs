@@ -1,0 +1,107 @@
+@use '../../styles/colors' as clr;
+@use '../../styles/media-queries' as mq;
+
+.nav-menu-toggle {
+  $toggle-btn-size: 3.6rem;
+
+  position: relative;
+  width: $toggle-btn-size;
+  height: $toggle-btn-size;
+  padding: 1rem 2rem;
+  border: 0;
+  border: 1px solid clr.$grey-200;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.4s ease;
+  z-index: 0;
+
+  // Toggle Button background
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: clr.$grey-100;
+    opacity: 1;
+    transition: 0.4s ease;
+  }
+
+  // On toggle, button background slides out of view
+  &[aria-expanded='true']::before {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  // Hamburger Icon
+  .hamburger {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: 0.4s ease;
+
+    &::before, // top
+    .middle-line,
+    &::after // bottom
+    {
+      position: absolute;
+      inset-inline: 6px;
+      height: 4px;
+      background-color: clr.$primary;
+      transition: all 0.4s ease;
+    }
+
+    // Create lines
+    &::before,
+    &::after {
+      content: '';
+      transform-origin: 96%;
+      border: 1px solid clr.$primary;
+    }
+
+    // top line
+    &::before {
+      transform: translateY(6px);
+    }
+
+    // middle line
+    .middle-line {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    // bottom line
+    &::after {
+      transform: translateY(24px);
+    }
+  }
+
+  // On toggle, show X (close) icon
+  &[aria-expanded='true'] .hamburger {
+    // Align X icon center
+    transform: translateX(-4px);
+
+    .middle-line {
+      opacity: 0;
+    }
+
+    // top line
+    &::before {
+      transform: translateY(6px) rotate(-45deg);
+    }
+
+    // bottom line
+    &::after {
+      transform: translateY(24px) rotate(45deg);
+    }
+  }
+
+  &:hover .hamburger {
+    &::before,
+    &::after {
+      background-color: darken(clr.$secondary, 6);
+    }
+  }
+
+  @include mq.md {
+    display: none;
+  }
+}

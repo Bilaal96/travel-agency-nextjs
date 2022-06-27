@@ -1,0 +1,57 @@
+// Breakpoints
+$breakpoints: (
+  'sm': 480px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+);
+
+// Media-queries
+@mixin sm {
+  @media (min-width: map-get($breakpoints, 'sm')) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: map-get($breakpoints, 'md')) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: map-get($breakpoints, 'lg')) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: map-get($breakpoints, 'xl')) {
+    @content;
+  }
+}
+
+@mixin min-width($bp: 0) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin max-width($bp: 0) {
+  @media (max-width: $bp) {
+    @content;
+  }
+}
+
+// Vertical Media Query
+@mixin min-height($bp: 0) {
+  @media (min-height: $bp) {
+    @content;
+  }
+}
+
+@mixin max-height($bp: 0) {
+  @media (max-height: $bp) {
+    @content;
+  }
+}

@@ -1,0 +1,40 @@
+@use './colors' as clr;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; // 1rem == 10px
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 1.8rem;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+//! Ensures that article images (from Strapi) don't overflow container
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.resize-animation-stopper * {
+  animation: none !important;
+  transition: none !important;
+}

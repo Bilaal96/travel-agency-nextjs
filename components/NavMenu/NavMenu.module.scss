@@ -1,0 +1,76 @@
+@use '../../styles/colors' as clr;
+@use '../../styles/media-queries' as mq;
+
+.nav-menu {
+  display: flex;
+
+  a {
+    padding: 2rem;
+    text-transform: capitalize;
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+      color: clr.$secondary;
+      background-color: lighten(clr.$grey-100, 4);
+    }
+
+    // NOTE: must come after :hover to override its bg-color style
+    &.active-nav-link {
+      background-color: clr.$grey-100;
+    }
+  }
+}
+
+// ----- Mobile Navigation -----
+// Effective up to *and including* max-width of 767px
+@include mq.max-width(767px) {
+  // Acts as navigation drawer on mobile
+  .nav-menu-wrapper {
+    position: fixed;
+    top: 64px;
+    right: 0;
+    border-bottom: 1px solid clr.$grey-200;
+    border-left: 1px solid clr.$grey-200;
+    transform: translateX(100%);
+    // delayed to slide in after ResponsiveNavToggle background slides out
+    transition: 0.2s ease-out 0.125s;
+    z-index: 900;
+
+    &[aria-expanded='true'] {
+      // Slide on-screen
+      transform: translateX(0);
+    }
+  }
+
+  // Contains navigation links
+  .nav-menu {
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    z-index: 1000;
+
+    // Dividers to visually separate navigation links
+    a + a {
+      border-top: 1px solid clr.$grey-200;
+    }
+
+    a {
+      font-size: 2.4rem;
+      padding: 2rem 4rem;
+      transform: translateY(-5px);
+      opacity: 0;
+      transition: color 0.2s ease, background-color 0.2s ease,
+        transform 0.3s ease 0.325s, opacity 0.3s ease 0.325s;
+      cursor: pointer;
+    }
+
+    // Transition into view on toggle
+    &[aria-expanded='true'] {
+      a {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  }
+}
