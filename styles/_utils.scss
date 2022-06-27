@@ -1,0 +1,6 @@
+$header-height: 64px;
+
+@mixin limit-width($max-width: 1000px) {
+  width: 100%;
+  max-width: $max-width;
+}
