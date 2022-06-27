@@ -28,7 +28,7 @@ const NavMenu = ({ isOpen }) => {
           <Link key={index} href={link.path}>
             <a
               className={
-                currentRoute === link.path && styles['active-nav-link']
+                currentRoute === link.path ? styles['active-nav-link'] : ''
               }
             >
               {link.name}
