@@ -1,6 +1,8 @@
 $light: #fff;
 $dark: #111;
-$primary: #0070f3;
+// $primary: #0070f3;
+$primary: #0058c0;
+$primary-dark: #004da7; // $primary: darken(#0070f3, 15);
 
 // Yellow
 // $secondary: #f2ce0c; // initial
@@ -10,3 +12,4 @@ $secondary: #e3c20b;
 
 $grey-100: #eee;
 $grey-200: #ddd;
+$grey-300: #ccc;

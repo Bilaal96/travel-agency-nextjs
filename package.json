@@ -16,6 +16,7 @@
     "react-markdown": "^8.0.3"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.2.1",
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
     "sass": "^1.52.3"

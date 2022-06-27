@@ -24,11 +24,11 @@ const NavMenu = ({ isOpen }) => {
   return (
     <div className={styles['nav-menu-wrapper']} aria-expanded={isOpen}>
       <nav className={styles['nav-menu']} aria-expanded={isOpen}>
-        {NAV_LINKS.map((link) => (
-          <Link href={link.path}>
+        {NAV_LINKS.map((link, index) => (
+          <Link key={index} href={link.path}>
             <a
               className={
-                currentRoute === link.path && styles['active-nav-link']
+                currentRoute === link.path ? styles['active-nav-link'] : ''
               }
             >
               {link.name}
