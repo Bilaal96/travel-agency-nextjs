@@ -1,0 +1,135 @@
+@use '../../styles/colors' as clr;
+@use '../../styles/media-queries' as mq;
+
+.footer {
+  padding: 2rem;
+  border-top: 2px solid clr.$grey-100;
+  background-color: clr.$primary-dark;
+  color: white;
+  text-align: center;
+
+  .highlight {
+    color: clr.$secondary;
+  }
+
+  .newsletter-signup-form {
+    h2 {
+      margin: 1rem 0 1.4rem;
+    }
+
+    p {
+      max-width: 45ch;
+      margin: 2rem auto 3rem;
+      font-weight: 600;
+    }
+
+    fieldset {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: none;
+    }
+
+    input[name='email'],
+    button {
+      font-size: 1.6rem;
+      height: 44px;
+      width: 100%;
+    }
+
+    input[name='email'] {
+      padding: 1rem;
+      border: none;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+
+      &::placeholder {
+        text-align: center;
+      }
+    }
+
+    button {
+      background-color: clr.$grey-200;
+      color: clr.$primary;
+      padding: 1rem 2rem;
+      border: none;
+      border-top: 2px solid clr.$grey-300;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: 0.2s ease;
+
+      &:hover {
+        background-color: clr.$grey-100;
+        color: darken(clr.$secondary, 8);
+      }
+    }
+  }
+
+  .social-icons {
+    padding: 0;
+    margin: 4rem 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    li a {
+      .icon {
+        fill: white;
+        transition: 0.2s ease;
+
+        &:hover {
+          fill: #e3c20b;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    font-size: 1.6rem;
+
+    span {
+      font-weight: 600;
+    }
+  }
+}
+
+// Change input form layout on sm-breakpoint & upwards
+@include mq.sm {
+  .footer {
+    .newsletter-signup-form {
+      fieldset {
+        flex-direction: row;
+      }
+
+      input[name='email'],
+      button {
+        width: unset;
+      }
+
+      input[name='email'] {
+        border-radius: 0;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+
+        &::placeholder {
+          text-align: left;
+        }
+      }
+
+      button {
+        border: none;
+        border-left: 2px solid clr.$grey-300;
+        border-radius: 0;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
+  }
+}
