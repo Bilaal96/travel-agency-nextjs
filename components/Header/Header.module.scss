@@ -2,6 +2,11 @@
 @use '../../styles/media-queries' as mq;
 @use '../../styles/utils' as utils;
 
+// .header position is fixed; offset following content so that it is completely visible
+.header-offset {
+  height: utils.$header-height;
+}
+
 .header {
   position: fixed;
   width: 100%;
@@ -14,12 +19,6 @@
   font-weight: 700;
   border-bottom: 2px solid clr.$grey-100;
   z-index: 500;
-
-  // .header position is fixed; offset adjacent sibling so that it is completely visible
-  & + * {
-    position: relative;
-    top: utils.$header-height;
-  }
 
   .container {
     display: flex;

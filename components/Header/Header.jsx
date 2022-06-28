@@ -8,22 +8,26 @@ import styles from './Header.module.scss';
 
 const Header = () => {
   return (
-    <header className={styles.header}>
-      <div className={styles.container}>
-        <div className={styles.logo}>
-          <Link href="/">
-            <a>
-              <span className={styles['logo-icon']}>✈</span>
-              <span className={styles['logo-text']}>
-                <span>Free</span>roam
-              </span>
-            </a>
-          </Link>
-        </div>
+    <>
+      <header className={styles.header}>
+        <div className={styles.container}>
+          <div className={styles.logo}>
+            <Link href="/">
+              <a>
+                <span className={styles['logo-icon']}>✈</span>
+                <span className={styles['logo-text']}>
+                  <span>Free</span>roam
+                </span>
+              </a>
+            </Link>
+          </div>
 
-        <NavRoot />
-      </div>
-    </header>
+          <NavRoot />
+        </div>
+      </header>
+
+      <div className={styles['header-offset']} />
+    </>
   );
 };
 
