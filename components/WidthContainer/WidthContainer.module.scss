@@ -5,13 +5,13 @@
 .width-container {
   @include utils.limit-width(map-get(mq.$breakpoints, 'md'));
   margin: 0 auto;
-  overflow: hidden;
 
   @include mq.lg {
     @include utils.limit-width(map-get(mq.$breakpoints, 'lg'));
+    padding-inline: 2rem;
   }
 
-  @include mq.xl {
-    @include utils.limit-width(map-get(mq.$breakpoints, 'xl'));
-  }
+  // @include mq.xl {
+  //   @include utils.limit-width(map-get(mq.$breakpoints, 'xl'));
+  // }
 }
