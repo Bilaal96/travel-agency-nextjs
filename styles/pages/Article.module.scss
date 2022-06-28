@@ -1,0 +1,53 @@
+@use '../media-queries' as mq;
+
+// Styles for single article - dynamic route [slug].js
+.article {
+  // Space between article content and edge of screen
+  &-header,
+  &-body {
+    padding-inline: 1rem;
+    @include mq.md {
+      padding-inline: 2rem;
+    }
+  }
+
+  // article-header
+  &-header {
+    padding-block: 2rem;
+
+    h1 {
+      font-size: 2.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .date {
+      color: #777;
+    }
+  }
+
+  // article-body
+  &-body {
+    padding-block: 1rem 2rem;
+
+    h2,
+    p {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+    }
+    h3 {
+      font-size: 2.1rem;
+      margin-bottom: 1.5rem;
+    }
+    h4 {
+      margin-bottom: 1rem;
+    }
+
+    h4,
+    p {
+      font-size: 1.8rem;
+    }
+  }
+}
