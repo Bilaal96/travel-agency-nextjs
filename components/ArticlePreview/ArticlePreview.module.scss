@@ -1,0 +1,51 @@
+@use '../../styles/colors' as clr;
+
+.article-preview-card {
+  width: 100%;
+  padding: 2rem;
+  border: 2px solid clr.$grey-300;
+  border-radius: 10px;
+  text-decoration: none;
+
+  &,
+  h3,
+  p {
+    transition: 0.2s ease;
+  }
+
+  h3 {
+    color: #555;
+    margin: 0 0 1.5rem 0;
+  }
+
+  p {
+    color: #777;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: #888;
+
+    h3 {
+      color: darken(clr.$secondary, 4);
+    }
+
+    p {
+      color: #333;
+    }
+  }
+
+  // h3 of every even article-preview-card
+  &:nth-of-type(even):hover,
+  &:nth-of-type(even):focus {
+    h3 {
+      color: clr.$primary;
+    }
+  }
+
+  &:active {
+    border-color: #333;
+  }
+}

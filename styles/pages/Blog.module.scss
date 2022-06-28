@@ -1,0 +1,49 @@
+@use '../colors' as clr;
+
+.blog {
+  padding-inline: 1rem;
+  margin-block: 1rem 3rem;
+}
+
+.articles-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.latest-articles,
+.other-articles {
+  h2 {
+    position: relative;
+    width: max-content;
+    margin-block: 6rem 4rem;
+    margin-inline: auto;
+    color: #333;
+
+    // Heading decorators
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      height: 0.5rem;
+      border-radius: 10px;
+      z-index: -1;
+    }
+
+    &::before {
+      width: 4rem;
+      background-color: lighten(clr.$primary, 10);
+      top: -0.75rem;
+      left: -1.5rem;
+    }
+
+    &::after {
+      width: 3rem;
+      background-color: clr.$secondary;
+      bottom: -1rem;
+      right: -1.75rem;
+    }
+  }
+}
