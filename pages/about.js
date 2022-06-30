@@ -1,6 +1,16 @@
+// components
+import ReactMarkdown from 'react-markdown';
 import Head from 'next/head';
+// -- custom
+import HeroImage from '../components/HeroImage/HeroImage';
 
-export default function About() {
+// styles
+import styles from '../styles/pages/About.module.scss';
+
+// constants
+import { STRAPI_URL } from '../constants';
+
+export default function About({ content }) {
   return (
     <>
       <Head>
@@ -9,7 +19,40 @@ export default function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>About</h1>
+      <HeroImage title="About Us" imageUrl="/team.jpg" />
+
+      <main className={styles.about}>
+        <ReactMarkdown>{content}</ReactMarkdown>
+      </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const fetchOptions = {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      query: `{
+        about {
+          data {
+            id
+            attributes {
+              content
+            }
+          }
+        }
+      }`,
+    }),
+  };
+  const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
+  const result = await response.json();
+  const { about } = result.data;
+  console.log({ about });
+
+  return {
+    props: {
+      content: about.data.attributes.content,
+    },
+  };
 }
