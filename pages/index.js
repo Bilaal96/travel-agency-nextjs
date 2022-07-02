@@ -1,6 +1,13 @@
+// components
 import Head from 'next/head';
+// -- custom
+import ImageSlider from '../components/ImageSlider/ImageSlider';
 
+// styles
 import styles from '../styles/pages/Home.module.scss';
+
+// constants
+import { homeSlides } from '../constants';
 
 export default function Home() {
   return (
@@ -11,8 +18,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>Home</h1>
+      <main className={styles.home}>
+        <section>
+          <ImageSlider
+            slides={homeSlides}
+            width={1000}
+            height={600}
+            withTextOverlay
+          />
+        </section>
       </main>
     </>
   );
