@@ -11,9 +11,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { useEffect } from 'react';
-import { useSwiper } from 'swiper/react';
-
 // custom styles
 import styles from './ImageSlider.module.scss';
 
@@ -24,12 +21,6 @@ import styles from './ImageSlider.module.scss';
  * @param { boolean } withTextOverlay - renders slide content (i.e. text) on top of transparent image overlay (that dims image)
  */
 const ImageSlider = ({ slides, width, height, withTextOverlay }) => {
-  const swiper = useSwiper();
-  useEffect(() => {
-    // const s = document.query;
-    console.log(swiper);
-  }, []);
-
   return (
     <Swiper
       className={styles['image-slider']}
