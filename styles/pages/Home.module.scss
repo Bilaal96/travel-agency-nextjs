@@ -1,86 +1,128 @@
-.container {
-  padding: 0 2rem;
-}
+@use '../colors' as clr;
+@use '../media-queries' as mq;
 
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+.sales-pitch {
+  padding-block: 2rem;
+  padding-inline: 1rem;
 
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
-}
+  h2 {
+    position: relative;
+    max-width: 30ch;
+    margin-inline: auto;
+    margin-block: 4rem 4rem;
+    text-align: center;
+    line-height: 1.6;
 
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
+    @include mq.sm {
+      .left-indent {
+        text-indent: -10rem;
+      }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
+      .right-indent {
+        text-indent: 10rem;
+      }
+    }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
+    @include mq.md {
+      margin-block: 6rem;
+    }
 
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
+    .free,
+    .roam {
+      text-transform: uppercase;
+    }
+    .free {
+      color: clr.$secondary;
+    }
+    .roam {
+      color: clr.$primary;
+    }
 
-.title,
-.description {
-  text-align: center;
-}
+    // Header decoration - bordered corners
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 3rem;
+      height: 2rem;
+    }
 
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
+    &::before {
+      top: -2rem;
+      left: 0;
+      border-top: 4px solid clr.$primary;
+      border-left: 4px solid clr.$primary;
+    }
 
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
+    &::after {
+      bottom: -2rem;
+      right: 0;
+      border-bottom: 4px solid clr.$secondary;
+      border-right: 4px solid clr.$secondary;
+    }
+  }
 
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
-}
+  .credibility {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 400px;
+    margin-inline: auto;
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
-}
+    // Image containers - image size is relative to container size
+    // NOTE: responsive image height is determined using padding-top
+    .trust-pilot,
+    .trip-advisor,
+    .travel-weekly {
+      position: relative;
+      width: 100%;
+    }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
+    .trust-pilot {
+      padding-top: 50%;
+    }
+
+    // text
+    .trust-builder {
+      padding: 1.5rem;
+      background-color: clr.$primary;
+      color: #f4f4f4;
+      border-radius: 4px;
+    }
+
+    .trip-advisor {
+      padding-top: 120%;
+      opacity: 0.8;
+    }
+
+    .travel-weekly {
+      padding-top: 110%;
+      opacity: 0.9;
+    }
+
+    @include mq.md {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 750px;
+
+      .trust-pilot {
+        grid-column: 1 / 2;
+      }
+
+      .trust-builder {
+        grid-column: 2 / 3;
+      }
+
+      .trip-advisor {
+        grid-column: 1 / 2;
+        grid-row-start: 2;
+      }
+
+      .travel-weekly {
+        grid-column: 2 / 3;
+        grid-row-start: 2;
+      }
+    }
   }
 }
