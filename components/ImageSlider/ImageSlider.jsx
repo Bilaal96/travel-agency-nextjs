@@ -32,6 +32,7 @@ const ImageSlider = ({ slides, width, height, withTextOverlay }) => {
       loop
       autoplay={{
         delay: 3000,
+        disableOnInteraction: false,
 
         // 02/07/2022 - Not currently working as intended
         // autoplay does not resume onMouseLeave - https://github.com/nolimits4web/swiper/discussions/5619
