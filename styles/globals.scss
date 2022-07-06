@@ -38,6 +38,8 @@ img {
 }
 
 .resize-animation-stopper * {
-  animation: none !important;
+  // animation: none !important;
+  // preferred over the above, as it prevents ImageReel animation from restarting on resize
+  animation-play-state: paused !important;
   transition: none !important;
 }

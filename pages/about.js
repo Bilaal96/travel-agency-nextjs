@@ -3,12 +3,13 @@ import ReactMarkdown from 'react-markdown';
 import Head from 'next/head';
 // -- custom
 import HeroImage from '../components/HeroImage/HeroImage';
+import ImageReel from '../components/ImageReel/ImageReel';
 
 // styles
 import styles from '../styles/pages/About.module.scss';
 
 // constants
-import { STRAPI_URL } from '../constants';
+import { STRAPI_URL, partnerLogos } from '../constants';
 
 export default function About({ content }) {
   return (
@@ -23,6 +24,11 @@ export default function About({ content }) {
 
       <main className={styles.about}>
         <ReactMarkdown>{content}</ReactMarkdown>
+
+        {/* Our Partners - autoplay infinity scroll */}
+        <section>
+          <ImageReel title="Our Partners" images={partnerLogos} />
+        </section>
       </main>
     </>
   );

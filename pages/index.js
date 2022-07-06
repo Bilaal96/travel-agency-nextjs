@@ -3,12 +3,13 @@ import Head from 'next/head';
 import Image from 'next/image';
 // -- custom
 import ImageSlider from '../components/ImageSlider/ImageSlider';
+import ImageReel from '../components/ImageReel/ImageReel';
 
 // styles
 import styles from '../styles/pages/Home.module.scss';
 
 // constants
-import { homeSlides } from '../constants';
+import { homeSlides, partnerLogos } from '../constants';
 
 export default function Home() {
   return (
@@ -70,6 +71,11 @@ export default function Home() {
               />
             </div>
           </div>
+        </section>
+
+        {/* Our Partners - autoplay infinity scroll */}
+        <section>
+          <ImageReel title="Our Partners" images={partnerLogos} />
         </section>
       </main>
     </>

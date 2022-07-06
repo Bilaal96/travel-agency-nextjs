@@ -59,3 +59,37 @@ export const homeSlides = [
     },
   },
 ];
+
+// Partners Logos - for ImageReel
+export const partnerLogos = [
+  {
+    src: '/partner_airbnb-logo.png',
+    width: 200,
+    height: 180,
+  },
+  {
+    src: '/partner_disneyland-paris-logo.png',
+    width: 200,
+    height: 180,
+  },
+  {
+    src: '/partner_emirates-logo.jpg',
+    width: 200,
+    height: 180,
+  },
+  {
+    src: '/partner_hilton-hotel-logo.png',
+    width: 200,
+    height: 180,
+  },
+  {
+    src: '/partner_marriott-international-logo.png',
+    width: 200,
+    height: 180,
+  },
+  {
+    src: '/partner_virgin-atlantic-logo.jpg',
+    width: 200,
+    height: 180,
+  },
+];
