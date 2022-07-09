@@ -34,6 +34,7 @@ const ImageGroup = ({ images }) => (
       <Image
         key={index}
         src={image.src}
+        alt={image.alt}
         width={image.width}
         height={image.height}
       />

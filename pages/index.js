@@ -60,7 +60,11 @@ export default function Home({ holidayPackages }) {
           <div className={styles['credibility']}>
             {/* TrustPilot 5 ⭐ rating */}
             <div className={styles['trust-pilot']}>
-              <Image src="/rep_trust-pilot.png" layout="fill" />
+              <Image
+                src="/rep_trust-pilot.png"
+                alt="Trust Pilot 5 star rating"
+                layout="fill"
+              />
             </div>
 
             <div className={styles['trust-builder']}>
@@ -76,6 +80,7 @@ export default function Home({ holidayPackages }) {
             <div className={styles['trip-advisor']}>
               <Image
                 src="/rep_tripadvisor-travellers-choice-2022.png"
+                alt="Trip Advisor Travellers' Choice Award 2022"
                 layout="fill"
               />
             </div>
@@ -84,6 +89,7 @@ export default function Home({ holidayPackages }) {
             <div className={styles['travel-weekly']}>
               <Image
                 src="/rep_travel-weekly-globe-nominee-2022.jpg"
+                alt="Nomination for Travel Weekly's Globe Travel Awards 2022"
                 layout="fill"
               />
             </div>
