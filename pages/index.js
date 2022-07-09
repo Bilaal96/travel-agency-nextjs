@@ -12,6 +12,7 @@ import styles from '../styles/pages/Home.module.scss';
 
 // constants
 import { homeSlides, partnerLogos, STRAPI_URL } from '../constants';
+import { GET_HOLIDAY_PACKAGES } from '../graphql/queries';
 
 export default function Home({ holidayPackages }) {
   const renderHolidayPackageCards = () => {
@@ -103,28 +104,7 @@ export async function getStaticProps() {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      query: `{
-        holidayPackages {
-          data {
-            id
-            attributes {
-              thumbnail {
-                data {
-                  attributes {
-                    url
-                    alternativeText
-                  }
-                }
-              }
-              location
-              numOfNights
-              inclusive
-              amenities
-              price
-            }
-          }
-        }
-      }`,
+      query: GET_HOLIDAY_PACKAGES,
     }),
   };
   const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);

@@ -9,6 +9,7 @@ import styles from '../../styles/pages/Blog.module.scss';
 
 // constants
 import { STRAPI_URL } from '../../constants';
+import { GET_ARTICLES_BY_NEWEST_FIRST } from '../../graphql/queries';
 
 export default function Blog({ latestArticles, restOfArticles }) {
   const renderArticlePreviews = (articles) => {
@@ -66,18 +67,7 @@ export async function getStaticProps(context) {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      query: `{
-        articles(sort: "createdAt:desc") {
-          data {
-            id
-            attributes {
-              title
-              slug
-              description
-            }
-          }
-        }
-      }`,
+      query: GET_ARTICLES_BY_NEWEST_FIRST,
     }),
   };
   const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);

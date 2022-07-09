@@ -10,6 +10,7 @@ import styles from '../styles/pages/About.module.scss';
 
 // constants
 import { STRAPI_URL, partnerLogos } from '../constants';
+import { GET_ABOUT_CONTENT } from '../graphql/queries';
 
 export default function About({ content }) {
   return (
@@ -39,22 +40,12 @@ export async function getStaticProps() {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      query: `{
-        about {
-          data {
-            id
-            attributes {
-              content
-            }
-          }
-        }
-      }`,
+      query: GET_ABOUT_CONTENT,
     }),
   };
   const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
   const result = await response.json();
   const { about } = result.data;
-  console.log({ about });
 
   return {
     props: {
