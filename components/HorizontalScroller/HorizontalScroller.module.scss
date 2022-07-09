@@ -1,0 +1,33 @@
+@use '../../styles/colors' as clr;
+@use '../../styles/media-queries' as mq;
+
+.container {
+  $spacing-1: 1rem;
+  $spacing-2: 2rem;
+
+  display: grid;
+  grid-auto-flow: column; // turn each child into a column
+  grid-auto-columns: 85%; // width of implicit (auto-created) columns
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-block: $spacing-2;
+  padding-inline: $spacing-1;
+  background-color: #f4f4f4;
+
+  // Prevent pulling to left/right when scrolling beyond container
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+
+  & > * {
+    scroll-snap-align: center;
+    scroll-margin: $spacing-2;
+  }
+
+  @include mq.sm {
+    grid-auto-columns: 70%;
+  }
+  @include mq.md {
+    grid-auto-columns: 40%;
+    padding: $spacing-2;
+  }
+}

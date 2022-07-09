@@ -3,15 +3,23 @@ import Head from 'next/head';
 import Image from 'next/image';
 // -- custom
 import ImageSlider from '../components/ImageSlider/ImageSlider';
+import HorizontalScroller from '../components/HorizontalScroller/HorizontalScroller';
+import HolidayPackageCard from '../components/HolidayPackageCard/HolidayPackageCard';
 import ImageReel from '../components/ImageReel/ImageReel';
 
 // styles
 import styles from '../styles/pages/Home.module.scss';
 
 // constants
-import { homeSlides, partnerLogos } from '../constants';
+import { homeSlides, partnerLogos, STRAPI_URL } from '../constants';
 
-export default function Home() {
+export default function Home({ holidayPackages }) {
+  const renderHolidayPackageCards = () => {
+    return holidayPackages.map((packageInfo) => (
+      <HolidayPackageCard key={packageInfo.id} packageInfo={packageInfo} />
+    ));
+  };
+
   return (
     <>
       <Head>
@@ -28,6 +36,13 @@ export default function Home() {
             height={600}
             withTextOverlay
           />
+        </section>
+
+        {/* Holiday packages */}
+        <section className={styles['holiday-packages']}>
+          <h2>Holiday Packages</h2>
+
+          <HorizontalScroller>{renderHolidayPackageCards()}</HorizontalScroller>
         </section>
 
         {/* Sales Pitch - credibility, reputation & trust */}
@@ -80,4 +95,45 @@ export default function Home() {
       </main>
     </>
   );
+}
+
+// Fetch holiday packages data from Strapi
+export async function getStaticProps() {
+  const fetchOptions = {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      query: `{
+        holidayPackages {
+          data {
+            id
+            attributes {
+              thumbnail {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+              location
+              numOfNights
+              inclusive
+              amenities
+              price
+            }
+          }
+        }
+      }`,
+    }),
+  };
+  const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
+  const result = await response.json();
+  const { holidayPackages } = result.data;
+
+  return {
+    props: {
+      holidayPackages: holidayPackages.data,
+    },
+  };
 }
