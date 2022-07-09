@@ -6,6 +6,7 @@ import ImageSlider from '../components/ImageSlider/ImageSlider';
 import HorizontalScroller from '../components/HorizontalScroller/HorizontalScroller';
 import HolidayPackageCard from '../components/HolidayPackageCard/HolidayPackageCard';
 import ImageReel from '../components/ImageReel/ImageReel';
+import DecoratedHeading from '../components/DecoratedHeading/DecoratedHeading';
 
 // styles
 import styles from '../styles/pages/Home.module.scss';
@@ -41,7 +42,7 @@ export default function Home({ holidayPackages }) {
 
         {/* Holiday packages */}
         <section className={styles['holiday-packages']}>
-          <h2>Holiday Packages</h2>
+          <DecoratedHeading level="2" text="Holiday Packages" />
 
           <HorizontalScroller>{renderHolidayPackageCards()}</HorizontalScroller>
         </section>

@@ -24,7 +24,9 @@ export default function About({ content }) {
       <HeroImage title="About Us" imageUrl="/team.jpg" />
 
       <main className={styles.about}>
-        <ReactMarkdown>{content}</ReactMarkdown>
+        <article>
+          <ReactMarkdown>{content}</ReactMarkdown>
+        </article>
 
         {/* Our Partners - autoplay infinity scroll */}
         <section>
