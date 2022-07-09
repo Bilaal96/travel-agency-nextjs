@@ -7,42 +7,6 @@
   padding: 2rem 1rem;
   overflow: hidden; // hides overflow from image-reel-container
 
-  .title {
-    position: relative;
-    text-align: center;
-    max-width: max-content;
-    margin-block: 2rem 4rem;
-    margin-inline: auto;
-
-    @include mq.md {
-      margin-block: 4rem 6rem;
-    }
-
-    // Heading decorators
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      height: 0.5rem;
-      border-radius: 10px;
-      z-index: -1;
-    }
-
-    &::before {
-      width: 4rem;
-      background-color: lighten(clr.$primary, 10);
-      top: -0.75rem;
-      left: -1.5rem;
-    }
-
-    &::after {
-      width: 3rem;
-      background-color: clr.$secondary;
-      bottom: -1rem;
-      right: -1.75rem;
-    }
-  }
-
   .image-reel-container {
     position: relative;
     // Width MUST BE EQUAL TO sum of ALL image widths

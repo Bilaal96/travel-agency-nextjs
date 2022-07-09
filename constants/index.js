@@ -64,31 +64,37 @@ export const homeSlides = [
 export const partnerLogos = [
   {
     src: '/partner_airbnb-logo.png',
+    alt: 'AirBnB logo',
     width: 200,
     height: 180,
   },
   {
     src: '/partner_disneyland-paris-logo.png',
+    alt: 'Disneyland Paris logo',
     width: 200,
     height: 180,
   },
   {
     src: '/partner_emirates-logo.jpg',
+    alt: 'Emirate Airlines logo',
     width: 200,
     height: 180,
   },
   {
     src: '/partner_hilton-hotel-logo.png',
+    alt: 'Hilton Hotel logo',
     width: 200,
     height: 180,
   },
   {
     src: '/partner_marriott-international-logo.png',
+    alt: 'Marriott International logo',
     width: 200,
     height: 180,
   },
   {
     src: '/partner_virgin-atlantic-logo.jpg',
+    alt: 'Virgin Atlantic logo',
     width: 200,
     height: 180,
   },

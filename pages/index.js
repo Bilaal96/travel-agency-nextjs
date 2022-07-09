@@ -6,12 +6,14 @@ import ImageSlider from '../components/ImageSlider/ImageSlider';
 import HorizontalScroller from '../components/HorizontalScroller/HorizontalScroller';
 import HolidayPackageCard from '../components/HolidayPackageCard/HolidayPackageCard';
 import ImageReel from '../components/ImageReel/ImageReel';
+import DecoratedHeading from '../components/DecoratedHeading/DecoratedHeading';
 
 // styles
 import styles from '../styles/pages/Home.module.scss';
 
 // constants
 import { homeSlides, partnerLogos, STRAPI_URL } from '../constants';
+import { GET_HOLIDAY_PACKAGES } from '../graphql/queries';
 
 export default function Home({ holidayPackages }) {
   const renderHolidayPackageCards = () => {
@@ -40,7 +42,7 @@ export default function Home({ holidayPackages }) {
 
         {/* Holiday packages */}
         <section className={styles['holiday-packages']}>
-          <h2>Holiday Packages</h2>
+          <DecoratedHeading level="2" text="Holiday Packages" />
 
           <HorizontalScroller>{renderHolidayPackageCards()}</HorizontalScroller>
         </section>
@@ -58,7 +60,11 @@ export default function Home({ holidayPackages }) {
           <div className={styles['credibility']}>
             {/* TrustPilot 5 ⭐ rating */}
             <div className={styles['trust-pilot']}>
-              <Image src="/rep_trust-pilot.png" layout="fill" />
+              <Image
+                src="/rep_trust-pilot.png"
+                alt="Trust Pilot 5 star rating"
+                layout="fill"
+              />
             </div>
 
             <div className={styles['trust-builder']}>
@@ -74,6 +80,7 @@ export default function Home({ holidayPackages }) {
             <div className={styles['trip-advisor']}>
               <Image
                 src="/rep_tripadvisor-travellers-choice-2022.png"
+                alt="Trip Advisor Travellers' Choice Award 2022"
                 layout="fill"
               />
             </div>
@@ -82,6 +89,7 @@ export default function Home({ holidayPackages }) {
             <div className={styles['travel-weekly']}>
               <Image
                 src="/rep_travel-weekly-globe-nominee-2022.jpg"
+                alt="Nomination for Travel Weekly's Globe Travel Awards 2022"
                 layout="fill"
               />
             </div>
@@ -103,28 +111,7 @@ export async function getStaticProps() {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      query: `{
-        holidayPackages {
-          data {
-            id
-            attributes {
-              thumbnail {
-                data {
-                  attributes {
-                    url
-                    alternativeText
-                  }
-                }
-              }
-              location
-              numOfNights
-              inclusive
-              amenities
-              price
-            }
-          }
-        }
-      }`,
+      query: GET_HOLIDAY_PACKAGES,
     }),
   };
   const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);

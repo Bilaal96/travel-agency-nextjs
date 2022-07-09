@@ -1,5 +1,7 @@
 // components
 import Image from 'next/image';
+// -- custom
+import DecoratedHeading from '../DecoratedHeading/DecoratedHeading';
 
 // styles
 import styles from './ImageReel.module.scss';
@@ -32,6 +34,7 @@ const ImageGroup = ({ images }) => (
       <Image
         key={index}
         src={image.src}
+        alt={image.alt}
         width={image.width}
         height={image.height}
       />
@@ -55,7 +58,7 @@ const ImageReel = ({ title, images }) => {
 
   return (
     <div className={styles['root-container']}>
-      {title && <h2 className={styles.title}>{title}</h2>}
+      {title && <DecoratedHeading level="2" text={title} />}
 
       <div className={styles['image-reel-container']}>
         <div className={styles['image-reel']}>{renderImageGroups(2)}</div>

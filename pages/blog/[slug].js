@@ -10,6 +10,10 @@ import styles from '../../styles/pages/Article.module.scss';
 
 // constants
 import { STRAPI_URL } from '../../constants';
+import {
+  GET_ALL_ARTICLE_SLUGS,
+  GET_ARTICLE_BY_SLUG,
+} from '../../graphql/queries.js';
 
 export default function Article({ article }) {
   const { title, content, splash, createdAt } = article;
@@ -45,15 +49,7 @@ export async function getStaticPaths() {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      query: `{
-        articles {
-          data {
-            attributes {
-              slug
-            }
-          }
-        }
-      }`,
+      query: GET_ALL_ARTICLE_SLUGS,
     }),
   };
   const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
@@ -76,28 +72,7 @@ export async function getStaticProps({ params }) {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      query: `{
-        articles(filters: { slug: {eq: "${params.slug}"} }) {
-          data {
-            attributes {
-              title
-              description
-              content
-              slug
-              splash {
-                data {
-                  attributes {
-                    url
-                  }
-                }
-              }
-              createdAt
-              publishedAt
-              updatedAt
-            }
-          }
-        }  
-      }`,
+      query: GET_ARTICLE_BY_SLUG(params.slug),
     }),
   };
   const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);

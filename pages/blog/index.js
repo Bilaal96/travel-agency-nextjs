@@ -2,6 +2,7 @@
 import Head from 'next/head';
 // -- custom
 import HeroImage from '../../components/HeroImage/HeroImage';
+import DecoratedHeading from '../../components/DecoratedHeading/DecoratedHeading';
 import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
 
 // styles
@@ -9,6 +10,7 @@ import styles from '../../styles/pages/Blog.module.scss';
 
 // constants
 import { STRAPI_URL } from '../../constants';
+import { GET_ARTICLES_BY_NEWEST_FIRST } from '../../graphql/queries';
 
 export default function Blog({ latestArticles, restOfArticles }) {
   const renderArticlePreviews = (articles) => {
@@ -39,7 +41,7 @@ export default function Blog({ latestArticles, restOfArticles }) {
       <main className={styles.blog}>
         {/* 3 Latest Articles */}
         <section className={styles['latest-articles']}>
-          <h2>Latest Articles</h2>
+          <DecoratedHeading level="2" text="Latest Articles" />
           <div className={styles['articles-list']}>
             {renderArticlePreviews(latestArticles)}
           </div>
@@ -47,7 +49,8 @@ export default function Blog({ latestArticles, restOfArticles }) {
 
         {/* Rest of articles */}
         <section className={styles['other-articles']}>
-          <h2>Other Articles</h2>
+          <DecoratedHeading level="2" text="Other Articles" />
+
           <div className={styles['articles-list']}>
             {renderArticlePreviews(restOfArticles)}
           </div>
@@ -57,7 +60,7 @@ export default function Blog({ latestArticles, restOfArticles }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   // Fetch all articles, sorted by creation date in descending order
   // i.e. with the newest article appearing first in the array; and the oldest appearing last
   const fetchOptions = {
@@ -66,18 +69,7 @@ export async function getStaticProps(context) {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      query: `{
-        articles(sort: "createdAt:desc") {
-          data {
-            id
-            attributes {
-              title
-              slug
-              description
-            }
-          }
-        }
-      }`,
+      query: GET_ARTICLES_BY_NEWEST_FIRST,
     }),
   };
   const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
