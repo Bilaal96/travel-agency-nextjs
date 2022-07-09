@@ -1,6 +1,46 @@
 @use '../colors' as clr;
 @use '../media-queries' as mq;
 
+.holiday-packages {
+  padding-block: 2rem;
+
+  h2 {
+    position: relative;
+    text-align: center;
+    max-width: max-content;
+    margin-block: 2rem 4rem;
+    margin-inline: auto;
+
+    @include mq.md {
+      margin-block: 4rem 6rem;
+    }
+
+    // Heading decorators
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      height: 0.5rem;
+      border-radius: 10px;
+      z-index: -1;
+    }
+
+    &::before {
+      width: 4rem;
+      background-color: lighten(clr.$primary, 10);
+      top: -0.75rem;
+      left: -1.5rem;
+    }
+
+    &::after {
+      width: 3rem;
+      background-color: clr.$secondary;
+      bottom: -1rem;
+      right: -1.75rem;
+    }
+  }
+}
+
 .sales-pitch {
   padding-block: 2rem;
   padding-inline: 1rem;
@@ -86,7 +126,7 @@
     // text
     .trust-builder {
       padding: 1.5rem;
-      background-color: clr.$primary;
+      background-color: clr.$primary-dark;
       color: #f4f4f4;
       border-radius: 4px;
     }
