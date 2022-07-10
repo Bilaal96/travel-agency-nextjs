@@ -5,7 +5,7 @@ const ResponsiveNavToggle = ({ isOpen, handleMenuToggle }) => {
   return (
     <button
       type="button"
-      className={styles['nav-menu-toggle']}
+      className={`${styles['nav-menu-toggle']} nav-menu-click-outside-exception`}
       onClick={handleMenuToggle}
       aria-expanded={isOpen}
     >
