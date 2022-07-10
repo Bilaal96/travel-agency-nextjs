@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import useClickOutside from '../../hooks/useClickOutside';
 
 // components
 import Link from 'next/link';
@@ -17,12 +18,19 @@ const NAV_LINKS = [
  * Displayed as navigation drawer in mobile view
  * Otherwise displayed as regular top navigation bar
  */
-const NavMenu = ({ isOpen }) => {
+const NavMenu = ({ isOpen, closeNavMenu }) => {
   const router = useRouter();
   const currentRoute = router.pathname;
 
+  // Close mobile NavMenu on click outside of component
+  const menuRef = useClickOutside(closeNavMenu, 'nav-menu');
+
   return (
-    <div className={styles['nav-menu-wrapper']} aria-expanded={isOpen}>
+    <div
+      ref={menuRef}
+      className={styles['nav-menu-wrapper']}
+      aria-expanded={isOpen}
+    >
       <nav className={styles['nav-menu']} aria-expanded={isOpen}>
         {NAV_LINKS.map((link, index) => (
           <Link key={index} href={link.path}>
@@ -30,6 +38,7 @@ const NavMenu = ({ isOpen }) => {
               className={
                 currentRoute === link.path ? styles['active-nav-link'] : ''
               }
+              onClick={closeNavMenu}
             >
               {link.name}
             </a>
