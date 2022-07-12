@@ -1,5 +1,8 @@
-// URL to make requests to Strapi CMS
-export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+// Get URL to make requests to Strapi CMS
+const dev = process.env.NODE_ENV !== 'production';
+export const STRAPI_URL = dev
+  ? process.env.STRAPI_URL_DEV
+  : process.env.STRAPI_URL_PROD;
 
 // Slides for Home page ImageSlider
 export const homeSlides = [
