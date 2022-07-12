@@ -105,5 +105,6 @@ export async function getStaticProps() {
       // rest of articles after splicing the array of all articles
       restOfArticles: articles.data,
     },
+    revalidate: 10,
   };
 }

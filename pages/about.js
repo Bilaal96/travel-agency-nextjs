@@ -53,5 +53,6 @@ export async function getStaticProps() {
     props: {
       content: about.data.attributes.content,
     },
+    revalidate: 10,
   };
 }
