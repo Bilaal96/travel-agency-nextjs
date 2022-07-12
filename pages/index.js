@@ -122,5 +122,6 @@ export async function getStaticProps() {
     props: {
       holidayPackages: holidayPackages.data,
     },
+    revalidate: 10,
   };
 }
