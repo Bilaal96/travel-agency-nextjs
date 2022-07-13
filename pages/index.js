@@ -7,6 +7,7 @@ import HorizontalScroller from '../components/HorizontalScroller/HorizontalScrol
 import HolidayPackageCard from '../components/HolidayPackageCard/HolidayPackageCard';
 import ImageReel from '../components/ImageReel/ImageReel';
 import DecoratedHeading from '../components/DecoratedHeading/DecoratedHeading';
+import NoData from '../components/NoData/NoData';
 
 // styles
 import styles from '../styles/pages/Home.module.scss';
@@ -44,7 +45,22 @@ export default function Home({ holidayPackages }) {
         <section className={styles['holiday-packages']}>
           <DecoratedHeading level="2" text="Holiday Packages" />
 
-          <HorizontalScroller>{renderHolidayPackageCards()}</HorizontalScroller>
+          {holidayPackages?.length > 0 ? (
+            <HorizontalScroller>
+              {renderHolidayPackageCards()}
+            </HorizontalScroller>
+          ) : (
+            <div className={styles['no-holiday-packages']}>
+              <NoData
+                message={
+                  "We're currently working on getting the best holiday packages for you 🎯"
+                }
+                messageEmphasised={
+                  '💡 Sign up to our <span>newsletter</span> to get our latest offers as soon as they arrive! 😁'
+                }
+              />
+            </div>
+          )}
         </section>
 
         {/* Sales Pitch - credibility, reputation & trust */}

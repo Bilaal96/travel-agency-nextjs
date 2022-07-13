@@ -1,0 +1,37 @@
+@use '../../styles/colors' as clr;
+
+.no-data {
+  max-width: 75ch;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding-block: 4rem;
+  padding-inline: 2rem;
+
+  &-message,
+  &-message-emphasised {
+    font-size: clamp(1.6rem, 2vw, 1.8rem);
+  }
+
+  &-message {
+    font-weight: 500;
+  }
+
+  &-message-emphasised {
+    max-width: 60ch;
+    margin-inline: auto;
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: clr.$primary-dark;
+    color: white;
+    font-weight: 500;
+
+    span {
+      color: clr.$secondary;
+    }
+  }
+}

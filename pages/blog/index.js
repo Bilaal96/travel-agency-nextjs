@@ -4,6 +4,7 @@ import Head from 'next/head';
 import HeroImage from '../../components/HeroImage/HeroImage';
 import DecoratedHeading from '../../components/DecoratedHeading/DecoratedHeading';
 import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
+import NoData from '../../components/NoData/NoData';
 
 // styles
 import styles from '../../styles/pages/Blog.module.scss';
@@ -41,20 +42,32 @@ export default function Blog({ latestArticles, restOfArticles }) {
       <main className={styles.blog}>
         {/* 3 Latest Articles */}
         <section className={styles['latest-articles']}>
-          <DecoratedHeading level="2" text="Latest Articles" />
-          <div className={styles['articles-list']}>
-            {renderArticlePreviews(latestArticles)}
-          </div>
+          <DecoratedHeading level="2" text={'Latest Articles'} />
+
+          {latestArticles?.length > 0 ? (
+            <div className={styles['articles-list']}>
+              {renderArticlePreviews(latestArticles)}
+            </div>
+          ) : (
+            <NoData
+              message={'There are currently no articles to read 😢'}
+              messageEmphasised={
+                '💡 Sign up to our <span>newsletter</span> using the form below to hear from us as soon as we post! 😁'
+              }
+            />
+          )}
         </section>
 
         {/* Rest of articles */}
-        <section className={styles['other-articles']}>
-          <DecoratedHeading level="2" text="Other Articles" />
+        {restOfArticles?.length > 0 && (
+          <section className={styles['other-articles']}>
+            <DecoratedHeading level="2" text="Other Articles" />
 
-          <div className={styles['articles-list']}>
-            {renderArticlePreviews(restOfArticles)}
-          </div>
-        </section>
+            <div className={styles['articles-list']}>
+              {renderArticlePreviews(restOfArticles)}
+            </div>
+          </section>
+        )}
       </main>
     </>
   );
