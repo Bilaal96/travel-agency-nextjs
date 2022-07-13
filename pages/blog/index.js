@@ -37,7 +37,11 @@ export default function Blog({ latestArticles, restOfArticles }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HeroImage title="Blog" imageUrl="/blog-header.jpg" />
+      <HeroImage
+        title="Blog"
+        src="/blog-header.jpg"
+        alt="Books & sunglasses on table at the beach"
+      />
 
       <main className={styles.blog}>
         {/* 3 Latest Articles */}

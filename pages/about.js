@@ -22,7 +22,11 @@ export default function About({ content }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HeroImage title="About Us" imageUrl="/team.jpg" />
+      <HeroImage
+        title="About Us"
+        src="/team.jpg"
+        alt="team of people in deep discussion"
+      />
 
       <main className={styles.about}>
         {content ? (
