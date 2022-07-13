@@ -60,6 +60,7 @@ export const GET_ARTICLE_BY_SLUG = (targetSlug) => `
             data {
               attributes {
                 url
+                alternativeText
               }
             }
           }
