@@ -4,6 +4,7 @@ import Head from 'next/head';
 // -- custom
 import HeroImage from '../components/HeroImage/HeroImage';
 import ImageReel from '../components/ImageReel/ImageReel';
+import NoData from '../components/NoData/NoData';
 
 // styles
 import styles from '../styles/pages/About.module.scss';
@@ -24,9 +25,13 @@ export default function About({ content }) {
       <HeroImage title="About Us" imageUrl="/team.jpg" />
 
       <main className={styles.about}>
-        <article>
-          <ReactMarkdown>{content}</ReactMarkdown>
-        </article>
+        {content ? (
+          <article>
+            <ReactMarkdown>{content}</ReactMarkdown>
+          </article>
+        ) : (
+          <NoData />
+        )}
 
         {/* Our Partners - autoplay infinity scroll */}
         <section>
