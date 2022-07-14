@@ -6,7 +6,7 @@ import styles from './ArticlePreview.module.scss';
 
 const ArticlePreview = ({ title, description, slug }) => {
   return (
-    <Link href={`/blog/${slug}`}>
+    <Link href={`/blog/${encodeURIComponent(slug)}`}>
       <a className={styles['article-preview-card']}>
         <h3>{title}</h3>
         <p>{description}</p>
