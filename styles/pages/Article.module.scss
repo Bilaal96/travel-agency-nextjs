@@ -1,4 +1,5 @@
 @use '../media-queries' as mq;
+@use '../colors' as clr;
 
 .no-article {
   padding-block: 6rem;
@@ -35,7 +36,8 @@
     padding-block: 1rem 2rem;
 
     h2,
-    p {
+    p,
+    ul {
       margin-bottom: 2rem;
     }
 
@@ -53,6 +55,14 @@
     h4,
     p {
       font-size: 1.8rem;
+    }
+
+    ul {
+      margin-left: 3rem;
+
+      li::marker {
+        color: clr.$primary;
+      }
     }
   }
 }
