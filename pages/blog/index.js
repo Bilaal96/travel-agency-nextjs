@@ -2,6 +2,7 @@ import sampleSize from 'lodash/sampleSize';
 
 // components
 import Head from 'next/head';
+import Link from 'next/link';
 // -- custom
 import HeroImage from '../../components/HeroImage/HeroImage';
 import DecoratedHeading from '../../components/DecoratedHeading/DecoratedHeading';
@@ -47,6 +48,11 @@ export default function Blog({ latestArticles, otherArticles }) {
               }
             />
           )}
+
+          {/* Link to view all articles */}
+          <Link href="/blog/all-articles">
+            <a className={styles['view-all-btn']}>View all </a>
+          </Link>
         </section>
 
         {/* Random selection of articles */}

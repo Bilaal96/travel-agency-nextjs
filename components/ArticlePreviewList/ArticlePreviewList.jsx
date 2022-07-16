@@ -1,19 +1,27 @@
 // components
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 
-const ArticlePreviewList = ({ articles }) => {
-  return articles.map((article) => {
-    const { title, description, slug } = article.attributes;
+// styles
+import styles from './ArticlePreviewList.module.scss';
 
-    return (
-      <ArticlePreview
-        key={article.id}
-        title={title}
-        description={description}
-        slug={slug}
-      />
-    );
-  });
+// Maps over articles props and renders a list of ArticlePreview components for each article
+const ArticlePreviewList = ({ articles }) => {
+  return (
+    <div className={styles['article-preview-list']}>
+      {articles.map((article) => {
+        const { title, description, slug } = article.attributes;
+
+        return (
+          <ArticlePreview
+            key={article.id}
+            title={title}
+            description={description}
+            slug={slug}
+          />
+        );
+      })}
+    </div>
+  );
 };
 
 export default ArticlePreviewList;
