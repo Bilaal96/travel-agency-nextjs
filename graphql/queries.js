@@ -55,6 +55,7 @@ export const GET_ARTICLE_BY_SLUG = (targetSlug) => `
           title
           description
           content
+          linkToOriginal
           slug
           splash {
             data {
