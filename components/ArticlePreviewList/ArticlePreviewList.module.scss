@@ -1,0 +1,7 @@
+.article-preview-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  max-width: 800px;
+  margin-inline: auto;
+}

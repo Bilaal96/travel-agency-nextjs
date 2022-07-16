@@ -5,19 +5,34 @@
   margin-block: 1rem 3rem;
 }
 
-.articles-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.6rem;
-  max-width: 800px;
-  margin-inline: auto;
-}
-
 .latest-articles,
 .other-articles {
   padding-block: 2rem;
 
   h2 {
     color: #333;
+  }
+}
+
+.latest-articles {
+  margin-bottom: 2rem;
+
+  .view-all-btn {
+    display: block;
+    width: max-content;
+    margin-inline: auto;
+    padding: 1.5rem 3rem;
+    margin-top: 5rem;
+    background-color: clr.$primary-dark;
+    color: white;
+    border-radius: 3px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.2s ease;
+
+    &:hover {
+      background-color: clr.$primary;
+    }
   }
 }

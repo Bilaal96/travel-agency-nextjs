@@ -2,10 +2,11 @@ import sampleSize from 'lodash/sampleSize';
 
 // components
 import Head from 'next/head';
+import Link from 'next/link';
 // -- custom
 import HeroImage from '../../components/HeroImage/HeroImage';
 import DecoratedHeading from '../../components/DecoratedHeading/DecoratedHeading';
-import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
+import ArticlePreviewList from '../../components/ArticlePreviewList/ArticlePreviewList';
 import NoData from '../../components/NoData/NoData';
 
 // styles
@@ -16,21 +17,6 @@ import { STRAPI_URL } from '../../constants';
 import { GET_ARTICLES_BY_NEWEST_FIRST } from '../../graphql/queries';
 
 export default function Blog({ latestArticles, otherArticles }) {
-  const renderArticlePreviews = (articles) => {
-    return articles.map((article) => {
-      const { title, description, slug } = article.attributes;
-
-      return (
-        <ArticlePreview
-          key={article.id}
-          title={title}
-          description={description}
-          slug={slug}
-        />
-      );
-    });
-  };
-
   return (
     <>
       <Head>
@@ -52,7 +38,7 @@ export default function Blog({ latestArticles, otherArticles }) {
 
           {latestArticles?.length > 0 ? (
             <div className={styles['articles-list']}>
-              {renderArticlePreviews(latestArticles)}
+              <ArticlePreviewList articles={latestArticles} />
             </div>
           ) : (
             <NoData
@@ -62,6 +48,11 @@ export default function Blog({ latestArticles, otherArticles }) {
               }
             />
           )}
+
+          {/* Link to view all articles */}
+          <Link href="/blog/all-articles">
+            <a className={styles['view-all-btn']}>View all </a>
+          </Link>
         </section>
 
         {/* Random selection of articles */}
@@ -70,7 +61,7 @@ export default function Blog({ latestArticles, otherArticles }) {
             <DecoratedHeading level="2" text="Other Articles" />
 
             <div className={styles['articles-list']}>
-              {renderArticlePreviews(otherArticles)}
+              <ArticlePreviewList articles={otherArticles} />
             </div>
           </section>
         )}
