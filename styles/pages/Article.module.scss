@@ -22,6 +22,7 @@
     padding-block: 2rem;
 
     h1 {
+      color: #333;
       font-size: 2.7rem;
       margin-bottom: 1rem;
     }
@@ -34,6 +35,14 @@
   // article-body
   &-body {
     padding-block: 1rem 2rem;
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #333;
+    }
 
     h2,
     p,
@@ -62,6 +71,15 @@
 
       li::marker {
         color: clr.$primary;
+      }
+    }
+
+    a {
+      text-decoration: underline;
+      color: clr.$primary;
+
+      &:hover {
+        color: clr.$secondary;
       }
     }
   }

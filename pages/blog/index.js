@@ -1,3 +1,5 @@
+import sampleSize from 'lodash/sampleSize';
+
 // components
 import Head from 'next/head';
 // -- custom
@@ -13,7 +15,7 @@ import styles from '../../styles/pages/Blog.module.scss';
 import { STRAPI_URL } from '../../constants';
 import { GET_ARTICLES_BY_NEWEST_FIRST } from '../../graphql/queries';
 
-export default function Blog({ latestArticles, restOfArticles }) {
+export default function Blog({ latestArticles, otherArticles }) {
   const renderArticlePreviews = (articles) => {
     return articles.map((article) => {
       const { title, description, slug } = article.attributes;
@@ -62,13 +64,13 @@ export default function Blog({ latestArticles, restOfArticles }) {
           )}
         </section>
 
-        {/* Rest of articles */}
-        {restOfArticles?.length > 0 && (
+        {/* Random selection of articles */}
+        {otherArticles?.length > 0 && (
           <section className={styles['other-articles']}>
             <DecoratedHeading level="2" text="Other Articles" />
 
             <div className={styles['articles-list']}>
-              {renderArticlePreviews(restOfArticles)}
+              {renderArticlePreviews(otherArticles)}
             </div>
           </section>
         )}
@@ -112,15 +114,18 @@ export async function getStaticProps() {
    */
   const { articles } = result.data;
 
-  // Get array of the 3 latest articles
+  // Extract the 3 latest articles into a new array
   const latestArticles = articles.data.splice(0, 3);
+
+  // Get otherArticles - i.e. a selection of random articles
+  // NOTE: as splice() is used (above), latestArticles are excluded from the selection for otherArticles
+  const articlesCount = 7; // num of articles to select
+  const otherArticles = sampleSize(articles.data, articlesCount);
 
   return {
     props: {
-      // array of the 3 latest articles
-      latestArticles,
-      // rest of articles after splicing the array of all articles
-      restOfArticles: articles.data,
+      latestArticles, // array of the 3 latest articles
+      otherArticles, // selection of random articles
     },
     revalidate: 10,
   };

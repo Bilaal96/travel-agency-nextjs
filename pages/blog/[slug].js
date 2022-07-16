@@ -17,7 +17,7 @@ import {
 } from '../../graphql/queries.js';
 
 export default function Article({ article }) {
-  const { title, content, splash, createdAt } = article;
+  const { title, content, splash, createdAt, linkToOriginal } = article;
   const splashImageUrl = splash.data[0]?.attributes.url;
   const splashImageAlt = splash.data[0]?.attributes.alternativeText;
 
@@ -44,6 +44,23 @@ export default function Article({ article }) {
 
           <section className={styles['article-body']}>
             <ReactMarkdown>{content}</ReactMarkdown>
+
+            <p>
+              <strong>Disclaimer:</strong> Article content is presentational
+              only. Full credit for this article goes to the author(s).
+            </p>
+            {linkToOriginal ? (
+              <p>
+                <strong>Original article:</strong>{' '}
+                <a
+                  href={linkToOriginal}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {title}
+                </a>
+              </p>
+            ) : null}
           </section>
         </article>
       ) : (
