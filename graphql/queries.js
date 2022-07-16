@@ -24,7 +24,7 @@ export const GET_HOLIDAY_PACKAGES = `
 
 export const GET_ARTICLES_BY_NEWEST_FIRST = `
   query {
-    articles(sort: "createdAt:desc") {
+    articles(sort: "createdAt:desc", pagination: { limit: 100 }) {
       data {
         id
         attributes {
