@@ -1,4 +1,4 @@
-import { STRAPI_GQL_URL } from '../constants';
+import { STRAPI_URL } from '../constants';
 
 /**
  * A custom fetch function, configured to query Strapi's GraphQL API.
@@ -14,7 +14,7 @@ export const queryStrapi = async (gqlQuery) => {
     body: JSON.stringify({ query: gqlQuery }),
   };
 
-  const response = await fetch(STRAPI_GQL_URL, fetchOptions);
+  const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
 
   // Handle error - NOT 2XX response
   if (!response.ok) {
