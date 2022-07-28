@@ -1,18 +1,73 @@
+import { useState } from 'react';
+import useSWR from 'swr';
+
 // components
 import Head from 'next/head';
 // -- custom
 import HeroImage from '../../components/HeroImage/HeroImage';
 import DecoratedHeading from '../../components/DecoratedHeading/DecoratedHeading';
 import ArticlePreviewList from '../../components/ArticlePreviewList/ArticlePreviewList';
+import Pagination from '../../components/Pagination/Pagination';
+import Spinner from '../../components/Spinner/Spinner';
+
+// utils
+import { gqlFetch } from '../../utils/gql-fetch';
 
 // styles
 import styles from '../../styles/pages/AllArticles.module.scss';
 
 // constants
 import { STRAPI_URL } from '../../constants';
-import { GET_ARTICLES_BY_NEWEST_FIRST } from '../../graphql/queries';
+import { GET_PAGINATED_ARTICLES } from '../../graphql/queries';
 
-export default function AllArticles({ articles }) {
+// Number of articles per page
+const ARTICLES_PER_PAGE = 10;
+
+export default function AllArticles({ initialArticles }) {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Get useSWR keys
+  const resource = `${STRAPI_URL}/graphql`;
+  const gqlQuery = GET_PAGINATED_ARTICLES(currentPage, ARTICLES_PER_PAGE);
+  const gqlFetchArgs = [resource, gqlQuery];
+
+  // Fetch paginated articles for currentPage
+  const { data: paginatedArticles, error } = useSWR(gqlFetchArgs, gqlFetch, {
+    fallback: { initialArticles },
+  });
+
+  // Renders paginated articles OR spinner if fetching articles
+  const renderPaginatedArticlePreviews = () => {
+    if (!paginatedArticles) {
+      return <Spinner containerStyles={{ width: '100%', height: '600px' }} />;
+    }
+
+    // Rename articles data fetched from Strapi
+    const articles = paginatedArticles.articles.data;
+    const metadata = paginatedArticles.articles.meta;
+
+    // Get total number of articles
+    const totalArticles = metadata.pagination.total;
+
+    // Pass props to Pagination component
+    const articlePagination = (
+      <Pagination
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+        itemsPerPage={ARTICLES_PER_PAGE}
+        totalItemsCount={totalArticles}
+      />
+    );
+
+    return (
+      <>
+        {articlePagination}
+        <ArticlePreviewList articles={articles} />
+        {articlePagination}
+      </>
+    );
+  };
+
   return (
     <>
       <Head>
@@ -29,30 +84,33 @@ export default function AllArticles({ articles }) {
 
       <main className={styles['all-articles']}>
         <DecoratedHeading level="2" text="All Articles" />
-        <ArticlePreviewList articles={articles} />
+
+        {/* Error UI */}
+        {error && (
+          <div className={styles.error}>
+            {
+              'Sorry, something went wrong 😔 Please refresh ⏳ or try again later.'
+            }
+          </div>
+        )}
+
+        {/* Render paginated articles OR spinner if fetching articles */}
+        {renderPaginatedArticlePreviews()}
       </main>
     </>
   );
 }
 
 export async function getStaticProps() {
-  const fetchOptions = {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: GET_ARTICLES_BY_NEWEST_FIRST,
-    }),
-  };
-  const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
-  const result = await response.json();
-
-  const { articles } = result.data;
+  // Server-side render first page of articles for SEO
+  const { articles: initialArticles } = await gqlFetch(
+    `${STRAPI_URL}/graphql`,
+    GET_PAGINATED_ARTICLES(1, ARTICLES_PER_PAGE)
+  );
 
   return {
     props: {
-      articles: articles.data,
+      initialArticles,
     },
   };
 }
