@@ -14,7 +14,8 @@ export const queryStrapi = async (gqlQuery) => {
     body: JSON.stringify({ query: gqlQuery }),
   };
 
-  const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
+  const url = new URL('/graphql', STRAPI_URL);
+  const response = await fetch(url, fetchOptions);
 
   // Handle error - NOT 2XX response
   if (!response.ok) {
