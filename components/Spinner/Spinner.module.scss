@@ -1,0 +1,125 @@
+@use '../../styles/colors' as clr;
+@use '../../styles/media-queries' as mq;
+
+.spinner-container {
+  $max-height: 10rem;
+
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  width: 100%;
+
+  // Set max-height to ensure spinner is in view
+  max-height: $max-height * 1.5;
+
+  // From screen height of 800px & up - increase max-height
+  @include mq.min-height(800px) {
+    max-height: $max-height * 3;
+  }
+}
+
+// Applied to RotatingSpinner
+// -- two curved edges rotating in a circle
+.spinner {
+  $spinner-size: 100px;
+  $edge-lg: 10px;
+  $edge-sm: 2px;
+
+  position: relative;
+  width: 100px;
+  height: 100px;
+
+  .curved-edge {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: $edge-lg solid transparent;
+    border-top-color: clr.$primary;
+    animation: rotateEdgeOne 1.2s linear infinite;
+  }
+
+  .curved-edge:nth-child(2) {
+    border: $edge-lg solid transparent;
+    border-bottom-color: clr.$secondary;
+    animation: rotateEdgeTwo 1.2s linear infinite;
+  }
+
+  // Edge one rotates & shrinks
+  @keyframes rotateEdgeOne {
+    0% {
+      transform: rotate(0deg);
+      border-width: $edge-lg;
+    }
+    50% {
+      transform: rotate(180deg);
+      border-width: $edge-sm;
+    }
+    100% {
+      transform: rotate(360deg);
+      border-width: $edge-lg;
+    }
+  }
+
+  // Edge two rotates & grows (as edge one shrinks)
+  @keyframes rotateEdgeTwo {
+    0% {
+      transform: rotate(0deg);
+      border-width: $edge-sm;
+    }
+    50% {
+      transform: rotate(180deg);
+      border-width: $edge-lg;
+    }
+    100% {
+      transform: rotate(360deg);
+      border-width: $edge-sm;
+    }
+  }
+}
+
+// Applied to BouncingSpinner
+// -- row of circles that move like a wave, via a delayed bounce animation
+.bouncer {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+
+  .ball {
+    $ball-size: 1.5rem;
+    $animation-duration: 1.2s;
+
+    background-color: clr.$primary;
+    width: $ball-size;
+    height: $ball-size;
+    border-radius: 50%;
+    animation: bounce $animation-duration cubic-bezier(0.19, 0.57, 0.3, 0.98)
+      infinite alternate;
+    transition: background-color $animation-duration ease;
+  }
+
+  // Can have up to 5 balls
+  .ball:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .ball:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .ball:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+  .ball:nth-child(5) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes bounce {
+    from {
+      transform: translateY(20px);
+      background-color: clr.$secondary;
+    }
+    to {
+      transform: translateY(0);
+      background-color: clr.$primary;
+    }
+  }
+}
