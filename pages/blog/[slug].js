@@ -6,11 +6,13 @@ import HeroImage from '../../components/HeroImage/HeroImage.jsx';
 import SeoDate from '../../components/SeoDate/SeoDate.jsx';
 import NoData from '../../components/NoData/NoData.jsx';
 
+// utils
+import { queryStrapi } from '../../utils/query-strapi';
+
 // styles
 import styles from '../../styles/pages/Article.module.scss';
 
 // constants
-import { STRAPI_URL } from '../../constants';
 import {
   GET_ALL_ARTICLE_SLUGS,
   GET_ARTICLE_BY_SLUG,
@@ -73,17 +75,7 @@ export default function Article({ article }) {
 }
 
 export async function getStaticPaths() {
-  // Per page, fetch article slug
-  const fetchOptions = {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      query: GET_ALL_ARTICLE_SLUGS,
-    }),
-  };
-  const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
-  const result = await response.json();
-  const { articles } = result.data;
+  const { articles } = await queryStrapi(GET_ALL_ARTICLE_SLUGS);
 
   // Generate paths array, passing article slug as params
   const paths = articles.data.map((article) => ({
@@ -97,17 +89,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const fetchOptions = {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      query: GET_ARTICLE_BY_SLUG(params.slug),
-    }),
-  };
-  const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
-  const result = await response.json();
-
-  const { articles } = result.data;
+  const { articles } = await queryStrapi(GET_ARTICLE_BY_SLUG(params.slug));
 
   return {
     props: { article: articles.data[0].attributes },

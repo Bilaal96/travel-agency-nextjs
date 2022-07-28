@@ -11,13 +11,12 @@ import Pagination from '../../components/Pagination/Pagination';
 import Spinner from '../../components/Spinner/Spinner';
 
 // utils
-import { gqlFetch } from '../../utils/gql-fetch';
+import { queryStrapi } from '../../utils/query-strapi';
 
 // styles
 import styles from '../../styles/pages/AllArticles.module.scss';
 
 // constants
-import { STRAPI_URL } from '../../constants';
 import { GET_PAGINATED_ARTICLES } from '../../graphql/queries';
 
 // Number of articles per page
@@ -26,13 +25,11 @@ const ARTICLES_PER_PAGE = 10;
 export default function AllArticles({ initialArticles }) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Get useSWR keys
-  const resource = `${STRAPI_URL}/graphql`;
+  // Get useSWR key(s) - i.e. args passed to fetcher
   const gqlQuery = GET_PAGINATED_ARTICLES(currentPage, ARTICLES_PER_PAGE);
-  const gqlFetchArgs = [resource, gqlQuery];
 
   // Fetch paginated articles for currentPage
-  const { data: paginatedArticles, error } = useSWR(gqlFetchArgs, gqlFetch, {
+  const { data: paginatedArticles, error } = useSWR(gqlQuery, queryStrapi, {
     fallback: { initialArticles },
   });
 
@@ -103,8 +100,7 @@ export default function AllArticles({ initialArticles }) {
 
 export async function getStaticProps() {
   // Server-side render first page of articles for SEO
-  const { articles: initialArticles } = await gqlFetch(
-    `${STRAPI_URL}/graphql`,
+  const { articles: initialArticles } = await queryStrapi(
     GET_PAGINATED_ARTICLES(1, ARTICLES_PER_PAGE)
   );
 
