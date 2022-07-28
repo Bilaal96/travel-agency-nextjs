@@ -37,9 +37,16 @@ export default function Blog({ latestArticles, otherArticles }) {
           <DecoratedHeading level="2" text={'Latest Articles'} />
 
           {latestArticles?.length > 0 ? (
-            <div className={styles['articles-list']}>
-              <ArticlePreviewList articles={latestArticles} />
-            </div>
+            <>
+              <div className={styles['articles-list']}>
+                <ArticlePreviewList articles={latestArticles} />
+              </div>
+
+              {/* Link to view all articles */}
+              <Link href="/blog/all-articles">
+                <a className={styles['view-all-btn']}>View all </a>
+              </Link>
+            </>
           ) : (
             <NoData
               message={'There are currently no articles to read 😢'}
@@ -48,11 +55,6 @@ export default function Blog({ latestArticles, otherArticles }) {
               }
             />
           )}
-
-          {/* Link to view all articles */}
-          <Link href="/blog/all-articles">
-            <a className={styles['view-all-btn']}>View all </a>
-          </Link>
         </section>
 
         {/* Random selection of articles */}
