@@ -28,7 +28,7 @@ const getClassNamesFromCssModule = ([key, value], styles) => {
  */
 const getClassNames = ([key, value]) => {
   // Apply root className if defined
-  if ((key === 'root') & (value !== undefined)) return value;
+  if (key === 'root' && value !== undefined) return value;
   // Apply conditional classNames that evaluated to true
   return key;
 };
@@ -65,7 +65,7 @@ const classNames = (cn, styles = null) => {
     : cnEntries.map(getClassNames);
 
   // return space-separated string of classNames
-  return cnArray.join(' ');
+  return cnArray.join(' ').trimEnd();
 };
 
 export default classNames;
