@@ -9,11 +9,14 @@ import ImageReel from '../components/ImageReel/ImageReel';
 import DecoratedHeading from '../components/DecoratedHeading/DecoratedHeading';
 import NoData from '../components/NoData/NoData';
 
+// utils
+import { queryStrapi } from '../utils/query-strapi';
+
 // styles
 import styles from '../styles/pages/Home.module.scss';
 
 // constants
-import { homeSlides, partnerLogos, STRAPI_URL } from '../constants';
+import { homeSlides, partnerLogos } from '../constants';
 import { GET_HOLIDAY_PACKAGES } from '../graphql/queries';
 
 export default function Home({ holidayPackages }) {
@@ -123,16 +126,7 @@ export default function Home({ holidayPackages }) {
 
 // Fetch holiday packages data from Strapi
 export async function getStaticProps() {
-  const fetchOptions = {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      query: GET_HOLIDAY_PACKAGES,
-    }),
-  };
-  const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
-  const result = await response.json();
-  const { holidayPackages } = result.data;
+  const { holidayPackages } = await queryStrapi(GET_HOLIDAY_PACKAGES);
 
   return {
     props: {

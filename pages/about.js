@@ -6,11 +6,14 @@ import HeroImage from '../components/HeroImage/HeroImage';
 import ImageReel from '../components/ImageReel/ImageReel';
 import NoData from '../components/NoData/NoData';
 
+// utils
+import { queryStrapi } from '../utils/query-strapi';
+
 // styles
 import styles from '../styles/pages/About.module.scss';
 
 // constants
-import { STRAPI_URL, partnerLogos } from '../constants';
+import { partnerLogos } from '../constants';
 import { GET_ABOUT_CONTENT } from '../graphql/queries';
 
 export default function About({ content }) {
@@ -47,16 +50,7 @@ export default function About({ content }) {
 }
 
 export async function getStaticProps() {
-  const fetchOptions = {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      query: GET_ABOUT_CONTENT,
-    }),
-  };
-  const response = await fetch(`${STRAPI_URL}/graphql`, fetchOptions);
-  const result = await response.json();
-  const { about } = result.data;
+  const { about } = await queryStrapi(GET_ABOUT_CONTENT);
 
   return {
     props: {

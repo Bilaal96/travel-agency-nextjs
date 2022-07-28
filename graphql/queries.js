@@ -47,6 +47,31 @@ export const GET_ALL_ARTICLE_SLUGS = `
     }
   }`;
 
+export const GET_PAGINATED_ARTICLES = (page, pageSize) => `
+  query {
+    articles(
+      sort: "createdAt:desc", 
+      pagination: { page: ${page}, pageSize: ${pageSize} }
+    ) {
+      data {
+        id
+        attributes {
+          title
+          slug
+          description
+        }
+      }
+      meta {
+        pagination {
+          page
+          pageSize
+          pageCount
+          total
+        }
+      }
+    }
+  }`;
+
 export const GET_ARTICLE_BY_SLUG = (targetSlug) => `
   query {
     articles(filters: { slug: {eq: "${targetSlug}"} }) {
