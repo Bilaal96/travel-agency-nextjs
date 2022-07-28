@@ -1,0 +1,90 @@
+@use '../../styles/colors' as clr;
+
+.pagination-item {
+  $button-size: 3.5rem;
+  $content-color: #333;
+
+  // default - i.e. not active
+  width: $button-size;
+  height: $button-size;
+  border-radius: 50%;
+  display: grid;
+  place-items: center; // center content
+
+  border: 1px solid #aaa;
+  background-color: transparent;
+  color: $content-color;
+  transition: 0.15s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+  }
+
+  // Arrow styles
+  &.prev-btn,
+  &.next-btn {
+    $arrow-size: 1.2rem;
+
+    background-color: rgba(0, 0, 0, 0.05);
+
+    svg {
+      width: $arrow-size;
+      height: $arrow-size;
+      fill: $content-color;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.09);
+    }
+
+    // Disabled arrow styles
+    &:disabled {
+      $disabled-color: clr.$grey-300;
+
+      background-color: transparent;
+      border: 1px solid $disabled-color;
+      pointer-events: none;
+
+      svg {
+        // next/prev arrow color
+        fill: $disabled-color;
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &.prev-btn {
+    // svg used is right-pointing chevron - rotate to point left
+    transform: rotate(180deg);
+  }
+
+  // Active styles
+  &.active {
+    background-color: lighten(clr.$primary, 58);
+    border: 1px solid clr.$primary-dark;
+
+    &:hover {
+      background-color: lighten(clr.$primary, 56);
+    }
+  }
+
+  // Ellipsis
+  &.ellipsis {
+    border: none;
+    pointer-events: none;
+
+    &:hover {
+      background-color: unset;
+      cursor: unset;
+    }
+  }
+
+  // Utilities
+  &.hide {
+    display: none;
+  }
+}
