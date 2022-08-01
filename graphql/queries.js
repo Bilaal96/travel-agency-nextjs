@@ -91,8 +91,10 @@ export const GET_ARTICLE_BY_SLUG = (targetSlug) => `
             }
           }
           createdAt
-          publishedAt
-          updatedAt
+
+          # uncomment if required:
+          # publishedAt
+          # updatedAt
         }
       }
     }  

@@ -1,8 +1,17 @@
+// root container
 .pagination {
+  display: grid;
+  gap: 1rem;
+  margin-block: 4rem;
+}
+
+// wrapper around main pagination buttons
+.pagination-wrapper,
+// wrapper around prev & next pagination buttons on small screens
+.pagination-nav-sm {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   max-width: max-content;
-  margin-block: 4rem;
   margin-inline: auto;
 }

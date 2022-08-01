@@ -1,25 +1,13 @@
 /**
- * Prevents janky CSS animations on window resize
- * To be called in useEffect hook
- * @returns event cleanup function, which should be invoked by useEffect on component unmount
+ * An event handler that prevents janky CSS animations. To be called on window 'resize' event.
+ * @param { Event } e - event object received from listener
  */
-export function resizeAnimationStopper() {
-  let resizeTimer;
+export default function resizeAnimationStopper(e) {
+  // Add class to body tag, styled to prevent transitions and animations
+  document.body.classList.add('resize-animation-stopper');
 
-  const handleBodyStylesOnResize = () => {
-    // Add class to body tag, styled to prevent transitions and animations
-    document.body.classList.add('resize-animation-stopper');
-
-    // Reset timer - i.e. clear previous timer
-    clearTimeout(resizeTimer);
-
-    // Remove class from body tag after specified timeout
-    resizeTimer = setTimeout(() => {
-      document.body.classList.remove('resize-animation-stopper');
-    }, 400);
-  };
-
-  window.addEventListener('resize', handleBodyStylesOnResize);
-
-  return () => window.removeEventListener('resize', handleBodyStylesOnResize);
+  // Remove class from body tag after specified timeout (in ms)
+  setTimeout(() => {
+    document.body.classList.remove('resize-animation-stopper');
+  }, 400);
 }
