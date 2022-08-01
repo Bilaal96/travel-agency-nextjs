@@ -11,7 +11,7 @@ export default function useMediaQuery(mediaQueryString) {
    * https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia#return_value
    * i.e. It is not an array */
   const [mediaQueryList, setMediaQueryList] = useState(null);
-  const [isMatch, setIsMatch] = useState(null);
+  const [isMatch, setIsMatch] = useState(false);
 
   // Set state with INITIAL match (true / false)
   useEffect(() => {
