@@ -1,4 +1,5 @@
 import usePagination, { ELLIPSIS } from '../../hooks/usePagination';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 // components
 // -- custom
@@ -27,9 +28,12 @@ const Pagination = ({
   onPageChange,
   // optional
   siblingCount,
+  // override styles
   rootClassName,
+  wrapperClassName,
   itemClassName,
 }) => {
+  const isSmallScreenWidth = useMediaQuery('(max-width: 400px)');
   const paginationRange = usePagination({
     currentPage,
     totalItemsCount,
@@ -78,29 +82,55 @@ const Pagination = ({
       return renderPageNumber(page, { key: index });
     });
 
+  // Previous & Next page buttons
+  const PrevPageButton = ({ hide }) => (
+    <PaginationItem
+      className={itemClassName}
+      content={<Chevron />}
+      onClick={handlePrevClick}
+      prev
+      disabled={currentPage === 1}
+      hide={hide}
+    />
+  );
+
+  const NextPageButton = ({ hide }) => (
+    <PaginationItem
+      className={itemClassName}
+      content={<Chevron />}
+      onClick={handleNextClick}
+      next
+      disabled={currentPage === lastPage}
+      hide={hide}
+    />
+  );
+
   const lastPage = paginationRange[paginationRange.length - 1];
 
   return (
     <div className={rootClassName ? rootClassName : styles['pagination']}>
-      {/* Previous button */}
-      <PaginationItem
-        className={itemClassName}
-        content={<Chevron />}
-        onClick={handlePrevClick}
-        prev
-        disabled={currentPage === 1}
-      />
+      {/* 
+        Pagination bar with previous & next buttons displayed inline
+          - inline previous & next buttons are hidden on small screens 
+      */}
+      <div
+        className={
+          wrapperClassName ? wrapperClassName : styles['pagination-wrapper']
+        }
+      >
+        <PrevPageButton hide={isSmallScreenWidth} />
+        {renderPaginationRange()}
+        <NextPageButton hide={isSmallScreenWidth} />
+      </div>
 
-      {renderPaginationRange()}
-
-      {/* Next button */}
-      <PaginationItem
-        className={itemClassName}
-        content={<Chevron />}
-        onClick={handleNextClick}
-        next
-        disabled={currentPage === lastPage}
-      />
+      {/* 
+        Grouped previous & next buttons
+          - shown beneath numbered page buttons (side-by-side) at small screen widths 
+      */}
+      <div className={styles['pagination-nav-sm']}>
+        <PrevPageButton hide={!isSmallScreenWidth} />
+        <NextPageButton hide={!isSmallScreenWidth} />
+      </div>
     </div>
   );
 };
