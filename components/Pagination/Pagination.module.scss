@@ -5,10 +5,8 @@
   margin-block: 4rem;
 }
 
-// wrapper around main pagination buttons
-.pagination-wrapper,
-// wrapper around prev & next pagination buttons on small screens
-.pagination-nav-sm {
+// wrapper around grouped pagination items
+.pagination-items-group {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
