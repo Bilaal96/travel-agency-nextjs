@@ -65,8 +65,10 @@ const usePagination = ({
      * left side: [ 1, "...", [sibling=4], [current=5], (etc.) ]
      * right side: [ (etc.), [current=3], [sibling=4], "...", 7 ]
      */
+    // Show left ellipsis if leftSibling is greater than 2nd page
     const showLeftEllipsis = leftSibling > 2;
-    const showRightEllipsis = rightSibling < totalPageCount - 2;
+    // Show right ellipsis if rightSibling is less than 2nd-to-last page
+    const showRightEllipsis = rightSibling < totalPageCount - 1;
 
     // Set values required to calculate no. of items in range on the right/left side
     /**
