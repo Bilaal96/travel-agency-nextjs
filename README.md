@@ -2,6 +2,33 @@
 
 A fictional Travel Agency landing page & blog built using Next.js & SCSS modules. Strapi CMS was used to build custom content-types for holiday packages, blog articles & about page content. Using a CMS such as Strapi allows content managers to update site content with minimal coding knowledge using the Strapi dashboard.
 
+**Table of Contents**
+
+- [1 | Application Technologies & Features](#1---application-technologies---features)
+  - [1.1 | Tech Used](#11---tech-used)
+  - [1.2 | Features](#12---features)
+  - [1.3 | Data Fetching & Rendering Strategies Used](#13---data-fetching---rendering-strategies-used)
+    - [1.3.1 | Querying Strapi With GraphQL](#131---querying-strapi-with-graphql)
+    - [1.3.2 | Next.js Rendering Strategies](#132---nextjs-rendering-strategies)
+- [2 | What I Learned](#2---what-i-learned)
+  - [2.1 | Next.js](#21---nextjs)
+  - [2.2 | Strapi](#22---strapi)
+  - [2.3 | Other](#23---other)
+- [3 | Issues Faced During Development](#3---issues-faced-during-development)
+  - [3.1 | Computing The Page Range For Pagination Component](#31---computing-the-page-range-for-pagination-component)
+    - [3.1.1 | Challenges](#311---challenges)
+    - [3.1.2 | Calculating Sibling Pages](#312---calculating-sibling-pages)
+    - [3.1.3 | When To Show Ellipsis](#313---when-to-show-ellipsis)
+  - [3.2 | Choosing A Method To Paginate Articles](#32---choosing-a-method-to-paginate-articles)
+    - [3.2.1 | Rendering Options for Articles Pagination: SSR vs CSR](#321---rendering-options-for-articles-pagination--ssr-vs-csr)
+    - [3.2.2 | Requesting Articles Efficiently & Reducing Server Load](#322---requesting-articles-efficiently---reducing-server-load)
+    - [3.2.3 | Why I Chose CSR With SWR Package](#323---why-i-chose-csr-with-swr-package)
+    - [3.2.4 | Conclusion](#324---conclusion)
+  - [3.3 | Closing Mobile Navigation On External Clicks](#33---closing-mobile-navigation-on-external-clicks)
+    - [3.3.1 | The Desired Outcome](#331---the-desired-outcome)
+    - [3.3.2 | The Problem: External Clicks Did Not Register On ImageSlider Component](#332---the-problem--external-clicks-did-not-register-on-imageslider-component)
+    - [3.3.3 | Finding & Implementing The Solution](#333---finding---implementing-the-solution)
+
 # 1 | Application Technologies & Features
 
 ## 1.1 | Tech Used
