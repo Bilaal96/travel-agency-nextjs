@@ -224,3 +224,7 @@ This ensured that:
 
 - the menu would close on external clicks;
 - the ImageSlider component was still swipeable.
+
+# 4 | Related Links
+
+- Backend repo link: https://github.com/Bilaal96/blog-strapi
